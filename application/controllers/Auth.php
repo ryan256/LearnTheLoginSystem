@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        is_loggedin();
+    }
+
     public function index()
     {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -102,6 +108,7 @@ class Auth extends CI_Controller
             redirect('Auth');
         }
     }
+
     public function logout()
     {
 
@@ -112,5 +119,11 @@ class Auth extends CI_Controller
            You have been Logged out!
           </div>');
         redirect('Auth');
+    }
+
+    public function blocked()
+    {
+
+        $this->load->view('Auth/blocked');
     }
 }
